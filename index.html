@@ -2,69 +2,21 @@
 <html>
 <head>
 <title>Quote Test</title>
-<!--  jQuery  -->
+<!--  jQuery + javascript  -->
     <script type="application/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    
+    <script type="application/javascript" src="quote.js"></script>
+
 <!--  Bootstrap  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     
 <!--  Font Awesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     
-    
+<!--  Stylesheet  -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<script>
-	$(document).ready(function(){
-        // global variables
-        var quoteURL = 'http://en.wikiquote.org//w/api.php?action=parse&format=json&page=Fight_Club_(film)&prop=text&section=2&callback=?';
-        
-        // button listener
-        $('#get-quote').on("click", function(){
-            
-            // get function - Gathers query from fight_club(film) page of wikiQuote
-            // json argument variable is the object passed from API query
-            $.getJSON(quoteURL, function(json){
-                
-                // run function to clean parsed text
-                var cleanQuoteString = arrayCleaning(json.parse.text['*']);
-                
-                // display rawQuoteString as retrieved from parsed text
-                $('#quote-content').html(JSON.stringify(cleanQuoteString));
-                
-                
-                /* Functions */
-                
-                // Write function to clean up JSON and make array of quotes
-                function arrayCleaning(rawQuoteString){
-                    // clean html tags
-                    var strippedString = rawQuoteString.replace(/(<([^>]+)>)/ig,"");
-                    
-                    // separate string into arrays
-                    var stringArray = strippedString.split('\n');
-                    
-                    // clean "" array values
-                    for (var i = 0; i < stringArray.length; i++){
-                        if (stringArray[i] == ""){
-                            stringArray.splice(i,1);
-                            i--;
-                        }
-                    }
-                    // remove what was originally the header string containing "Tyler Durden [edit]"
-                    stringArray.splice(0,1);
-                    
-                    return stringArray;                    
-                }
-      });
-        
-    });
-    
-    
-  });
-</script>
-
 
 <div class="row spacer"></div>
 <div class="container">
@@ -74,15 +26,14 @@
         
         <!-- Page Header -->
         <div class="page-header text-center">
-          <h1>Quote Generator</h1>
-          <small>Click to load a new quote!</small>
+          <h1>Tyler Durden Quote Generator</h1>
         </div>
         <!-- End Header -->
         
         <!-- Quote Box -->
         <div class="row col-xs-12 text-center">
           <h2>Tyler Durden says:</h2>
-          <blockquote id="quote-content">Content</blockquote>
+            <blockquote id="quote-content"></blockquote>
           <p class="text-right">Quotes from: <a href="https://en.wikiquote.org/wiki/Fight_Club_(film)">wikiQuotes</a></p>
         </div>
         
@@ -90,18 +41,12 @@
         <div class="row spacer"></div>
         
         <!-- Quote Generation Button -->
-        <button class="center-block btn btn-default" id="get-quote"><span class="fa fa-send"></span> Click Me!</button>
+        <button class="center-block btn btn-danger btn-lg" id="get-quote"><span class="fa fa-hand-rock-o" aria-hidden="true"></span> Click Me!</button>
         
       </div> <!-- end column -->
     </div> <!-- end row -->
   </div> <!-- end jumbotron -->
 </div> <!-- end container -->
-
-
-    
-    
-    
-    
 </body>
 
 </html>
