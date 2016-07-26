@@ -18,12 +18,47 @@
 
 <script>
 	$(document).ready(function(){
-    $('#get-quote').on("click", function(){
-      
-      $.getJSON("https://en.wikiquote.org/w/api.php", function(json){
+        // global variables
+        var quoteURL = 'http://en.wikiquote.org//w/api.php?action=parse&format=json&page=Fight_Club_(film)&prop=text&section=2&callback=?';
         
+        // button listener
+        $('#get-quote').on("click", function(){
+            
+            // get function - Gathers query from fight_club(film) page of wikiQuote
+            // json argument variable is the object passed from API query
+            $.getJSON(quoteURL, function(json){
+                
+                // run function to clean parsed text
+                var cleanQuoteString = arrayCleaning(json.parse.text['*']);
+                
+                // display rawQuoteString as retrieved from parsed text
+                $('#quote-content').html(JSON.stringify(cleanQuoteString));
+                
+                
+                /* Functions */
+                
+                // Write function to clean up JSON and make array of quotes
+                function arrayCleaning(rawQuoteString){
+                    // clean html tags
+                    var strippedString = rawQuoteString.replace(/(<([^>]+)>)/ig,"");
+                    
+                    // separate string into arrays
+                    var stringArray = strippedString.split('\n');
+                    
+                    // clean "" array values
+                    for (var i = 0; i < stringArray.length; i++){
+                        if (stringArray[i] == ""){
+                            stringArray.splice(i,1);
+                            i--;
+                        }
+                    }
+                    // remove what was originally the header string containing "Tyler Durden [edit]"
+                    stringArray.splice(0,1);
+                    
+                    return stringArray;                    
+                }
       });
-      
+        
     });
     
     
@@ -40,15 +75,15 @@
         <!-- Page Header -->
         <div class="page-header text-center">
           <h1>Quote Generator</h1>
-          <small>Simply click to load a new quote!</small>
+          <small>Click to load a new quote!</small>
         </div>
         <!-- End Header -->
         
         <!-- Quote Box -->
         <div class="row col-xs-12 text-center">
-          <h2 id="#quote-title">Title:</h2>
-          <blockquote id="#quote-content">Content:</blockquote>
-          <p class="text-right" id="#quote-source">Source:</p>
+          <h2>Tyler Durden says:</h2>
+          <blockquote id="quote-content">Content</blockquote>
+          <p class="text-right">Quotes from: <a href="https://en.wikiquote.org/wiki/Fight_Club_(film)">wikiQuotes</a></p>
         </div>
         
         <!-- Spacer -->
