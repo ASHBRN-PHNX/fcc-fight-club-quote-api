@@ -2,21 +2,34 @@
 <html>
 <head>
 <title>Quote Test</title>
-<!--  jQuery + javascript  -->
+<!--  jQuery  -->
     <script type="application/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script type="application/javascript" src="quote.js"></script>
-
+    
 <!--  Bootstrap  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     
 <!--  Font Awesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     
-<!--  Stylesheet  -->
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
+
+<script>
+	$(document).ready(function(){
+    $('#get-quote').on("click", function(){
+      
+      $.getJSON("https://en.wikiquote.org/w/api.php", function(json){
+        
+      });
+      
+    });
+    
+    
+  });
+</script>
+
 
 <div class="row spacer"></div>
 <div class="container">
@@ -26,27 +39,34 @@
         
         <!-- Page Header -->
         <div class="page-header text-center">
-          <h1>Tyler Durden Quote Generator</h1>
+          <h1>Quote Generator</h1>
+          <small>Simply click to load a new quote!</small>
         </div>
         <!-- End Header -->
         
         <!-- Quote Box -->
         <div class="row col-xs-12 text-center">
-          <h2>Tyler Durden says:</h2>
-            <blockquote id="quote-content"></blockquote>
-          <p class="text-right">Quotes from: <a href="https://en.wikiquote.org/wiki/Fight_Club_(film)">wikiQuotes</a></p>
+          <h2 id="#quote-title">Title:</h2>
+          <blockquote id="#quote-content">Content:</blockquote>
+          <p class="text-right" id="#quote-source">Source:</p>
         </div>
         
         <!-- Spacer -->
         <div class="row spacer"></div>
         
         <!-- Quote Generation Button -->
-        <button class="center-block btn btn-danger btn-lg" id="get-quote"><span class="fa fa-hand-rock-o" aria-hidden="true"></span> Click Me!</button>
+        <button class="center-block btn btn-default" id="get-quote"><span class="fa fa-send"></span> Click Me!</button>
         
       </div> <!-- end column -->
     </div> <!-- end row -->
   </div> <!-- end jumbotron -->
 </div> <!-- end container -->
+
+
+    
+    
+    
+    
 </body>
 
 </html>
