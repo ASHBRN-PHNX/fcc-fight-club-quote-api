@@ -1,0 +1,31 @@
+body {
+    background: rgb(255,153,0);
+    color: white;
+}
+
+blockquote {
+    border-color: #c9302c;
+}
+
+.page-header {
+    border-bottom: 2px solid #c9302c;
+}
+
+.spacer {margin-top: 25px;}
+
+.jumbotron {
+    background:
+        linear-gradient(
+            rgba(200,70,0,0.90),
+            rgba(255,153,0,0.90)
+        ),
+        url('https://zombiesruineverything.files.wordpress.com/2013/08/durd9.jpg');
+}
+
+#tweet {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: #c9302c;
+    margin-right: 15px;
+}
